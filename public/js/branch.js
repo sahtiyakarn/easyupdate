@@ -1,4 +1,4 @@
-
+// ........................Branch details..........................
 $(document).ready(function () {
     $('#branch_state').on('change', function () {
         var state_name = this.value;
@@ -55,6 +55,70 @@ $(document).ready(function () {
                 $('select[name="branch_district_edit"]').empty();
                 $.each(data, function (key, value) {
                     $('select[name="branch_district_edit"]').append(
+                        '<option value="' + value + '">' + value +
+                        '</option>');
+                });
+            }
+        });
+    });
+});
+
+
+//.......................staff details.............................
+
+$(document).ready(function () {
+    $('#staff_state').on('change', function () {
+        var state_name = this.value;
+        // console.log(state_name); return;
+        $.ajax({
+            type: 'GET',
+            url: '/getdistrict/' + btoa(state_name),
+            dataType: "json",
+            success: function (data) {
+                console.log(data);
+                $('select[name="staff_district"]').empty();
+                $.each(data, function (key, value) {
+                    $('select[name="staff_district"]').append(
+                        '<option value="' + value + '">' + value +
+                        '</option>');
+                });
+            }
+        });
+    });
+
+    $(document).on('click', '#editStaff', function () {
+        console.log("edit Staff");
+        var edit_id = $(this).val();
+        // console.log(edit_id); return;
+        $.ajax({
+            type: "GET",
+            url: "/staff_edit/" + edit_id,
+            success: function (response) {
+                // console.log(response);
+                $('#edit_id').val(response.adminname.id);
+                $('#staff_admin_name').val(response.adminname.name);
+                $('#staff_email').val(response.adminname.email);
+                $('#staff_address').val(response.adminname.address);
+                $('#staff_contact').val(response.adminname.contact);
+                document.getElementById('staff_state_edit').value = response.adminname.state;
+                document.getElementById('staff_district_edit').value = response.adminname.district;
+                document.getElementById('staff_profile_photo_show').src = APP_URL + "/admin_profile_photo/" + response.adminname.profile_photo;
+
+            }
+        });
+    });
+
+    $('#staff_state_edit').on('change', function () {
+        var state_name = this.value;
+        $.ajax({
+            type: 'GET',
+            url: '/getdistrict/' + btoa(state_name),
+            dataType: "json",
+            success: function (data) {
+                console.log(data);
+                $('select[name="staff_district_edit"]').empty();
+                $.each(data, function (key, value) {
+                    $('select[name="staff_district_edit"]').append(
                         '<option value="' + value + '">' + value +
                         '</option>');
                 });

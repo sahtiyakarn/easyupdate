@@ -15,7 +15,7 @@
                         <li><a href="{{ route('branch') }}"><i class="fa fa-home"></i> Branch</a>
                         </li>
                     @endif
-                    <li><a href="{{ route('branch') }}"><i class="fa fa-home"></i> Branch</a>
+                    <li><a href="{{ route('staff') }}"><i class="fa fa-home"></i> Staff</a>
                     </li>
                     <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">

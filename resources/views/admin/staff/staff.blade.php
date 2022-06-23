@@ -56,16 +56,16 @@
         <div class="">
             <div class="page-title">
                 <div class="title_left">
-                    <h4>Branch Details </h4>
+                    <h4>staff Details </h4>
                 </div>
 
                 <div class="title_right">
                     <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                         <div class="input-group">
-                            <input type="text" class="form-control" value="Add New Branch" readonly>
+                            <input type="text" class="form-control" value="Add New Branch Staff" readonly>
                             <span class="input-group-btn">
                                 <button class="btn btn-secondary" type="button" data-toggle="modal"
-                                    data-target=".bs-example-modal-sm">Go!</button>
+                                    data-target="#staff-modal">Go!</button>
                             </span>
                         </div>
                     </div>
@@ -86,13 +86,12 @@
                                             width="100%">
                                             <thead>
                                                 <tr>
-                                                    {{-- <th>Photo</th> --}}
                                                     <th>ID</th>
-                                                    <th>Is_Admin</th>
+                                                    {{-- <th>Is_Admin</th> --}}
                                                     <th>Name</th>
                                                     <th>Email</th>
-                                                    <th>Branch Name</th>
-                                                    <th>Type</th>
+                                                    {{-- <th>Branch Name</th> --}}
+                                                    {{-- <th>Type</th> --}}
                                                     <th>Contact</th>
                                                     <th>Address</th>
                                                     <th>District</th>
@@ -102,18 +101,14 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($branchdetails as $item)
+                                                @foreach ($staffdetails as $item)
                                                     <tr>
-                                                        {{-- <td class="text-lowercase"><img
-                                                                src="{{ asset('admin_profile_photo/' . $item->profile_photo) }}"
-                                                                alt="{{ $item->profile_photo }}" style="width: 3em;">
-                                                        </td> --}}
                                                         <td> {{ $item->id }}</td>
-                                                        <td>{{ $item->is_admin ? 'Admin' : 'Staff' }}</td>
+                                                        {{-- <td>{{ $item->is_admin ? 'Admin' : 'Staff' }}</td> --}}
                                                         <td>{{ $item->name }}</td>
                                                         <td class="text-lowercase">{{ $item->email }}</td>
-                                                        <td>{{ $item->branch_name }}</td>
-                                                        <td>{{ $item->branch_type }}</td>
+                                                        {{-- <td>{{ $item->branch_name }}</td> --}}
+                                                        {{-- <td>{{ $item->branch_type }}</td> --}}
                                                         <td>{{ $item->contact }}</td>
                                                         <td>{{ $item->address }}</td>
                                                         <td>{{ $item->district }}</td>
@@ -124,8 +119,8 @@
                                                         </td>
                                                         <td>
 
-                                                            <button class="btn btn-info btn-xs" id="editBranch"
-                                                                data-toggle="modal" data-target="#bs-example-modal-sm-edit"
+                                                            <button class="btn btn-info btn-xs" id="editStaff"
+                                                                data-toggle="modal" data-target="#staff-modal-edit"
                                                                 value="{{ Crypt::encrypt($item->id) }}">
                                                                 <i class="fa fa-pencil"></i> </button>
 
@@ -147,77 +142,41 @@
     </div>
 @endsection
 
-<!-- Add Branch Modal -->
-<form action="{{ route('branchstore') }}" method="post" enctype="multipart/form-data">
+<!-- Add Staff Modal -->
+<form action="{{ route('staffstore') }}" method="post" enctype="multipart/form-data">
     @csrf
-    <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade" id="staff-modal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
                 <div class="modal-body">
-                    <label for="fullname">Full Name * :</label>
-                    <input type="text" class="form-control form-control-sm" name="branch_admin_name" required />
+                    <label for="fullname">Staff Full Name * :</label>
+                    <input type="text" class="form-control form-control-sm" name="staff_admin_name" required />
 
-                    <label for="email">Email * :</label>
-                    <input type="email" class="form-control form-control-sm" name="branch_email"
+                    <label for="email">Staff Email * :</label>
+                    <input type="email" class="form-control form-control-sm" name="staff_email"
                         data-parsley-trigger="change" required />
 
-                    {{-- <label>Is Admin *:</label>
-                    <p>
-                        Yes:
-                        <input type="radio" class="flat" name="gender" id="genderM" value="M" checked=""
-                            required /> No:
-                        <input type="radio" class="flat" name="gender" id="genderF" value="F" />
-                    </p> --}}
-                    <label for="fullname">Branch Name * :</label>
-                    <input type="text" class="form-control form-control-sm" name="branch_name" required />
-
-                    {{-- <label>Hobbies (2 minimum):</label>
-                    <p style="padding: 5px;">
-                        <input type="checkbox" name="hobbies[]" id="hobby1" value="ski" data-parsley-mincheck="2"
-                            required class="flat" /> Skiing
-                        <br />
-
-                        <input type="checkbox" name="hobbies[]" id="hobby2" value="run" class="flat" /> Running
-                        <br />
-
-                        <input type="checkbox" name="hobbies[]" id="hobby3" value="eat" class="flat" />
-                        Eating
-                        <br />
-
-                        <input type="checkbox" name="hobbies[]" id="hobby4" value="sleep" class="flat" />
-                        Sleeping
-                        <br />
-                    <p> --}}
-
-                    <label for="heard">Branch Type *:</label>
-                    <select name="branch_type" class="form-control form-control-sm" required>
-                        <option value="">Choose..</option>
-                        <option value="Institute">Institute</option>
-                        <option value="School">School</option>
-                        <option value="Coaching">Coaching</option>
-                    </select>
-
-                    <label for="message">address :</label>
-                    <textarea required="required" class="form-control form-control-sm" name="branch_address" data-parsley-trigger="keyup"
+                    <label for="message">Staff Address :</label>
+                    <textarea required="required" class="form-control form-control-sm" name="staff_address" data-parsley-trigger="keyup"
                         data-parsley-minlength="20" data-parsley-maxlength="100"
                         data-parsley-minlength-message="Come on! You need to enter at least a 20 caracters long comment.."
                         data-parsley-validation-threshold="10"></textarea>
-                    <label for="heard">Branch State *:</label>
-                    <select id="branch_state" name="branch_state" class="form-control form-control-sm" required>
+                    <label for="heard">Staff State *:</label>
+                    <select id="staff_state" name="staff_state" class="form-control form-control-sm" required>
                         <option value="">Choose..</option>
                         @foreach ($state as $item)
                             <option value="{{ $item->state_name }}">{{ $item->state_name }}</option>
                         @endforeach
                     </select>
-                    <label for="heard">Branch District *:</label>
-                    <select id="branch_district" name="branch_district" class="form-control form-control-sm">
+                    <label for="heard">Staff District *:</label>
+                    <select id="staff_district" name="staff_district" class="form-control form-control-sm">
                         <option value="">Choose..</option>
                     </select>
-                    <label for="fullname">Branch Contact * :</label>
-                    <input type="text" class="form-control form-control-sm"
-                        data-inputmask="'mask' : '999-999-9999'" name="branch_contact">
+                    <label for="fullname">Staff Contact * :</label>
+                    <input type="text" class="form-control form-control-sm" data-inputmask="'mask' : '999-999-9999'"
+                        name="staff_contact">
                     <label for="fullname">Upload Image :</label>
-                    <input type="file" class="form-control form-control-sm" name="branch_profile_photo">
+                    <input type="file" class="form-control form-control-sm" name="staff_profile_photo">
 
                 </div>
                 <div class="modal-footer">
@@ -230,89 +189,54 @@
         </div>
     </div>
 </form>
-<!-- Add Branch Modal -->
+<!-- Add Staff Modal -->
 
-<!-- Edit Branch Modal -->
-<form action="{{ route('branchupate') }}" method="post" enctype="multipart/form-data">
+<!-- Edit Staff Modal -->
+<form action="{{ route('staffupate') }}" method="post" enctype="multipart/form-data">
     @csrf
-    <div class="modal fade" id="bs-example-modal-sm-edit" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade" id="staff-modal-edit" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
                 <input type="hidden" name="edit_id" id="edit_id">
                 <div class="modal-body">
-                    <label for="fullname">Full Name * :</label>
-                    <input type="text" class="form-control form-control-sm" id="branch_admin_name"
-                        name="branch_admin_name" required />
+                    <label for="fullname">Staff Full Name * :</label>
+                    <input type="text" class="form-control form-control-sm" id="staff_admin_name"
+                        name="staff_admin_name" required />
 
-                    <label for="email">Email * :</label>
-                    <input type="email" class="form-control form-control-sm" name="branch_email" id="branch_email"
+                    <label for="email">Staff Email * :</label>
+                    <input type="email" class="form-control form-control-sm" name="staff_email" id="staff_email"
                         data-parsley-trigger="change" required />
 
-                    {{-- <label>Is Admin *:</label>
-                    <p>
-                        Yes:
-                        <input type="radio" class="flat" name="gender" id="genderM" value="M" checked=""
-                            required /> No:
-                        <input type="radio" class="flat" name="gender" id="genderF" value="F" />
-                    </p> --}}
-                    <label for="fullname">Branch Name * :</label>
-                    <input type="text" class="form-control form-control-sm" name="branch_name" id="branch_name"
-                        required />
 
-                    {{-- <label>Hobbies (2 minimum):</label>
-                    <p style="padding: 5px;">
-                        <input type="checkbox" name="hobbies[]" id="hobby1" value="ski" data-parsley-mincheck="2"
-                            required class="flat" /> Skiing
-                        <br />
 
-                        <input type="checkbox" name="hobbies[]" id="hobby2" value="run" class="flat" /> Running
-                        <br />
 
-                        <input type="checkbox" name="hobbies[]" id="hobby3" value="eat" class="flat" />
-                        Eating
-                        <br />
-
-                        <input type="checkbox" name="hobbies[]" id="hobby4" value="sleep" class="flat" />
-                        Sleeping
-                        <br />
-                    <p> --}}
-
-                    <label for="heard">Branch Type *:</label>
-                    <select name="branch_type"id="branch_type" class="form-control form-control-sm" required>
-                        <option value="">Choose..</option>
-                        <option value="Institute">Institute</option>
-                        <option value="School">School</option>
-                        <option value="Coaching">Coaching</option>
-                    </select>
-
-                    <label for="message">address :</label>
-                    <textarea required="required" class="form-control form-control-sm" name="branch_address" id="branch_address"
+                    <label for="message">Staff Address :</label>
+                    <textarea required="required" class="form-control form-control-sm" name="staff_address" id="staff_address"
                         data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100"
                         data-parsley-minlength-message="Come on! You need to enter at least a 20 caracters long comment.."
                         data-parsley-validation-threshold="10"></textarea>
-                    <label for="heard">Branch State *:</label>
-                    <select id="branch_state_edit" name="branch_state_edit" class="form-control form-control-sm"
+                    <label for="heard">Staff State *:</label>
+                    <select id="staff_state_edit" name="staff_state_edit" class="form-control form-control-sm"
                         required>
                         @foreach ($state as $item)
                             <option value="{{ $item->state_name }}">{{ $item->state_name }}</option>
                         @endforeach
                     </select>
-                    <label for="heard">Branch District *:</label>
-                    <select id="branch_district_edit" name="branch_district_edit"
-                        class="form-control form-control-sm">
+                    <label for="heard">Staff District *:</label>
+                    <select id="staff_district_edit" name="staff_district_edit" class="form-control form-control-sm">
                         @foreach ($district as $item)
                             <option value="{{ $item->district_name }}">{{ $item->district_name }}
                             </option>
                         @endforeach
                     </select>
-                    <label for="fullname">Branch Contact * :</label>
+                    <label for="fullname">Staff Contact * :</label>
                     <input type="text" class="form-control form-control-sm"
-                        data-inputmask="'mask' : '999-999-9999'" name="branch_contact"id="branch_contact">
+                        data-inputmask="'mask' : '999-999-9999'" name="staff_contact"id="staff_contact">
                     <label for="fullname">Upload Image :</label>
-                    <input type="file" class="form-control form-control-sm" name="branch_profile_photo">
+                    <input type="file" class="form-control form-control-sm" name="staff_profile_photo">
                     <br>
-                    <img src="" alt="branch_profile_photo_show" id="branch_profile_photo_show"
-                        name="branch_profile_photo_show" class="img-fluid" width="70px">
+                    <img src="" alt="staff_profile_photo_show" id="staff_profile_photo_show"
+                        name="staff_profile_photo_show" class="img-fluid" width="70px">
 
 
                 </div>
@@ -326,4 +250,4 @@
         </div>
     </div>
 </form>
-<!-- Edit Branch Modal -->
+<!-- Edit Staff Modal -->

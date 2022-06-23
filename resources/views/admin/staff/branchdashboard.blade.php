@@ -6,30 +6,32 @@
                 <div class="page-body">
                     <div class="row">
                         <!-- task, page, download counter  start -->
-                        <div class="col-sm-12 col-md-4 text-center text-white">
-                            <div class="card">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <h4 class="text-warning">{{ $total_branch_curr }}</h4>
-                                        <h6 class="text-muted">Branch Add this Month </h6>
+                        @if (Auth::guard('admin')->user()->is_admin == '2')
+                            <div class="col-sm-12 col-md-4 text-center text-white">
+                                <div class="card">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h4 class="text-warning">{{ $total_branch_curr }}</h4>
+                                            <h6 class="text-muted">Branch Add this Month </h6>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer bg-danger ">
+                                        Total Branch: {{ $total_branch }}
                                     </div>
                                 </div>
-                                <div class="card-footer bg-danger ">
-                                    Total Branch: {{ $total_branch }}
-                                </div>
                             </div>
-                        </div>
+                        @endif
 
                         <div class="col-sm-12 col-md-4 text-center text-white">
                             <div class="card">
                                 <div class="row">
                                     <div class="col-12">
-                                        <h4 class="text-warning">{{ $total_staff_curr }}</h4>
-                                        <h6 class="text-muted">Staff Add this Month </h6>
+                                        <h4 class="text-warning"></h4>
+                                        <h6 class="text-muted"> Add this Month </h6>
                                     </div>
                                 </div>
                                 <div class="card-footer bg-danger ">
-                                    Total Staff: {{ $total_staff }}
+                                    Total Branch: {{ $total_branch }}
                                 </div>
                             </div>
                         </div>

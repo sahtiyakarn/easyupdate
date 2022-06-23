@@ -14,16 +14,24 @@ class AdminController extends Controller
     {
         $admin_name = Auth::guard('admin')->user()->name;
         $profile_photo = Auth::guard('admin')->user()->profile_photo;
+
         $branchdetails = Admin::where(['is_admin' => '1'])->get();
-        $branchdetails_curr = Admin::whereMonth('created_at', Carbon::now()->month)->where(['is_admin' => '1'])->get();
         $total_branch =  $branchdetails->count();
+        $branchdetails_curr = Admin::whereMonth('created_at', Carbon::now()->month)->where(['is_admin' => '1'])->get();
         $total_branch_curr =  $branchdetails_curr->count();
+
+        $staffdetails = Admin::where(['is_admin' => '0'])->get();
+        $total_staff =  $staffdetails->count();
+        // showmydata($total_staff);
+        $staffdetails_curr = Admin::whereMonth('created_at', Carbon::now()->month)->where(['is_admin' => '0'])->get();
+        $total_staff_curr =  $staffdetails_curr->count();
+
 
         // showmydata($branchdetails->toArray());
 
         if (Auth::guard('admin')->user()->is_admin == "2") {
             $web_title = "Super Admin Dashboard";
-            $data = compact('web_title', 'admin_name', 'profile_photo', 'total_branch', 'total_branch_curr');
+            $data = compact('web_title', 'admin_name', 'profile_photo', 'total_branch', 'total_branch_curr', 'total_staff',  'total_staff_curr');
             return view('admin.superadmin')->with($data);
         } elseif (Auth::guard('admin')->user()->is_admin == "1") {
             $web_title = "Admin Dashboard";
