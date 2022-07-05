@@ -36,7 +36,7 @@
     <!-- jquery.inputmask -->
     <script src="{{ asset('assets/vendors/jquery.inputmask/dist/min/jquery.inputmask.bundle.min.js') }}"></script>
     <!-- Barnch js -->
-    <script src="{{ asset('js/branch.js') }}"></script>
+    <script src="{{ asset('js/staff.js') }}"></script>
     <script>
         var APP_URL = {!! json_encode(url('/')) !!}
     </script>
@@ -150,10 +150,11 @@
             <div class="modal-content">
                 <div class="modal-body">
                     <label for="fullname">Staff Full Name * :</label>
-                    <input type="text" class="form-control form-control-sm" name="staff_admin_name" required />
+                    <input type="text" class="form-control form-control-sm" name="staff_admin_name"
+                        id="staff_admin_name" required />
 
                     <label for="email">Staff Email * :</label>
-                    <input type="email" class="form-control form-control-sm" name="staff_email"
+                    <input type="email" class="form-control form-control-sm" name="staff_email" id="staff_email"
                         data-parsley-trigger="change" required />
 
                     <label for="message">Staff Address :</label>
@@ -200,11 +201,11 @@
                 <input type="hidden" name="edit_id" id="edit_id">
                 <div class="modal-body">
                     <label for="fullname">Staff Full Name * :</label>
-                    <input type="text" class="form-control form-control-sm" id="staff_admin_name"
-                        name="staff_admin_name" required />
+                    <input type="text" class="form-control form-control-sm" id="staff_admin_name1"
+                        name="staff_admin_name1" required />
 
                     <label for="email">Staff Email * :</label>
-                    <input type="email" class="form-control form-control-sm" name="staff_email" id="staff_email"
+                    <input type="email" class="form-control form-control-sm" name="staff_email1" id="staff_email1"
                         data-parsley-trigger="change" required />
 
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController as ASController;
 use App\Http\Controllers\Admin\BranchAdminController;
 use App\Http\Controllers\Admin\StaffController;
+use App\Http\Controllers\Admin\AdmissionController;
 
 Route::get('/clear', function () {
 
@@ -44,8 +45,18 @@ Route::middleware('admin')->group(function () {
 
     // StaffController
     Route::get('/staff', [StaffController::class, 'index'])->name('staff');
+    Route::get('/staff_website_return', [StaffController::class, 'getWebsite'])->name('staffgetwebsite');
     Route::post('/staff_store', [StaffController::class, 'store'])->name('staffstore');
     Route::get('/staff_edit/{edit_id}', [StaffController::class, 'edit'])->name('staffedit');
     Route::post('/staff_update', [StaffController::class, 'update'])->name('staffupate');
+
+    // AdmissionController
+    Route::get('/admission_list', [AdmissionController::class, 'index'])->name('admissionlist');
+    Route::get('/admission', [AdmissionController::class, 'create'])->name('admission');
+    Route::post('/admission_store', [AdmissionController::class, 'store'])->name('admissionstore');
+
+    Route::get('/admission_edit/{edit_id}', [AdmissionController::class, 'edit'])->name('admissionedit');
+    Route::post('/admission_update', [AdmissionController::class, 'update'])->name('admissionupate');
+    Route::get('/admission_batch_time/{state_id}', [AdmissionController::class, 'batchTime'])->name('admissionbatchtime');
 });
 Route::get('admin/logout', [ASController::class, 'destroy'])->name('admin.logout');

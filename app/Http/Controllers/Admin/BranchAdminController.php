@@ -21,9 +21,6 @@ class BranchAdminController extends Controller
         $this->district = District::all();
     }
 
-    public function branchDashboard()
-    {
-    }
 
     public function index()
     {
@@ -58,8 +55,10 @@ class BranchAdminController extends Controller
 
     public function store(Request $request)
     {
+        // showmydata($request->all());
+        DB::enableQueryLog();
         $contact = str_replace("-", "", $request->branch_contact);
-        // showmydata($contact);
+
         //for image 
         if (!empty($request->branch_profile_photo)) {
             $branchadminname = str_replace(' ', '', $request->branch_admin_name);
@@ -68,24 +67,23 @@ class BranchAdminController extends Controller
         } else {
             $branch_profile_photo =  'no_image.jpg';
         }
-        // showmydata($branch_profile_photo);
-        // showmydata($branchadminname);
-        $admin = Admin::create([
-            'email' => $request->branch_email,
-            'name' => $request->branch_admin_name,
-            'password' => Hash::make($request->branch_email),
-            'is_admin' => '1',
-            'profile_photo' => $branch_profile_photo,
-            'branch_name' => $request->branch_name,
-            'branch_type' => $request->branch_type,
-            'address' => $request->branch_address,
-            'contact' => $contact,
-            'state' => $request->branch_state,
-            'district' =>  $request->branch_district,
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
-        ]);
+
+        $admin = new Admin;
+        $admin->email = $request->branch_email;
+        $admin->name = $request->branch_admin_name;
+        $admin->password = Hash::make($request->branch_email);
+        $admin->is_admin = '1';
+        $admin->profile_photo = $branch_profile_photo;
+        $admin->website = $request->website;
+        $admin->branch_name = $request->branch_name;
+        $admin->branch_type = $request->branch_type;
+        $admin->address = $request->branch_address;
+        $admin->contact = $contact;
+        $admin->state = $request->branch_state;
+        $admin->district =  $request->branch_district;
+        $admin->save();
         return redirect()->back();
+        DB::getQueryLog();
     }
 
     public function edit($id)
@@ -120,6 +118,7 @@ class BranchAdminController extends Controller
         $admin->email = $request->branch_email;
         $admin->name = $request->branch_admin_name;
         $admin->profile_photo = $branch_profile_photo;
+        $admin->website = $request->website;
         $admin->address = $request->branch_address;
         $admin->branch_name = $request->branch_name;
         $admin->branch_type = $request->branch_type;

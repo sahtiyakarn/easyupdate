@@ -30,6 +30,12 @@ class StaffController extends Controller
         $data = compact('web_title', 'admin_name', 'profile_photo', 'state', 'staffdetails', 'district');
         return view('admin.staff.staff')->with($data);
     }
+
+    public function getWebsite()
+    {
+        $website = Auth::guard('admin')->user()->website;
+        return response()->json($website);
+    }
     public function store(Request $request)
     {
         $contact = str_replace("-", "", $request->staff_contact);
@@ -50,11 +56,13 @@ class StaffController extends Controller
             'password' => Hash::make($request->staff_email),
             'address' => $request->staff_address,
             'contact' => $contact,
+            'website' => $request->staff_email,
             'state' => $request->staff_state,
             'district' =>  $request->staff_district,
             'is_admin' => '0',
             'profile_photo' => $staff_profile_photo,
             'branch_name' => Auth::guard('admin')->user()->branch_name,
+            'website' => Auth::guard('admin')->user()->website,
             'branch_type' => Auth::guard('admin')->user()->branch_type,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
@@ -91,8 +99,8 @@ class StaffController extends Controller
         }
         // showmydata($staff_profile_photo);
         $admin = Admin::find($request->edit_id);
-        $admin->email = $request->staff_email;
-        $admin->name = $request->staff_admin_name;
+        $admin->email = $request->staff_email1;
+        $admin->name = $request->staff_admin_name1;
         $admin->profile_photo = $staff_profile_photo;
         $admin->address = $request->staff_address;
         $admin->contact = str_replace("-", "", $request->staff_contact);

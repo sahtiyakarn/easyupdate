@@ -20,7 +20,7 @@
     <link href="{{ asset('assets/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css') }}"
         rel="stylesheet" />
     <!-- Custom Theme Style -->
-    <link href="{{ asset('assets/build/css/custom.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/build/css/custom.css') }}" rel="stylesheet">
 
     <!-- Custom My Style -->
     @yield('mycss')

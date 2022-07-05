@@ -23,6 +23,7 @@ class CreateAdminsTable extends Migration
             $table->enum('is_admin', ['2', '1', '0'])->default(0);
             $table->text('profile_photo')->nullable();
             $table->string('branch_name');
+            $table->string('website');
             $table->enum('branch_type', ['Institute', 'School', 'Coaching']);
             $table->text('address');
             $table->string('contact', 11);

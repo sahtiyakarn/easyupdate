@@ -91,6 +91,7 @@
                                                     <th>Is_Admin</th>
                                                     <th>Name</th>
                                                     <th>Email</th>
+                                                    <th>Website</th>
                                                     <th>Branch Name</th>
                                                     <th>Type</th>
                                                     <th>Contact</th>
@@ -104,15 +105,12 @@
                                             <tbody>
                                                 @foreach ($branchdetails as $item)
                                                     <tr>
-                                                        {{-- <td class="text-lowercase"><img
-                                                                src="{{ asset('admin_profile_photo/' . $item->profile_photo) }}"
-                                                                alt="{{ $item->profile_photo }}" style="width: 3em;">
-                                                        </td> --}}
                                                         <td> {{ $item->id }}</td>
                                                         <td>{{ $item->is_admin ? 'Admin' : 'Staff' }}</td>
                                                         <td>{{ $item->name }}</td>
                                                         <td class="text-lowercase">{{ $item->email }}</td>
                                                         <td>{{ $item->branch_name }}</td>
+                                                        <td>{{ $item->website }}</td>
                                                         <td>{{ $item->branch_type }}</td>
                                                         <td>{{ $item->contact }}</td>
                                                         <td>{{ $item->address }}</td>
@@ -161,33 +159,11 @@
                     <input type="email" class="form-control form-control-sm" name="branch_email"
                         data-parsley-trigger="change" required />
 
-                    {{-- <label>Is Admin *:</label>
-                    <p>
-                        Yes:
-                        <input type="radio" class="flat" name="gender" id="genderM" value="M" checked=""
-                            required /> No:
-                        <input type="radio" class="flat" name="gender" id="genderF" value="F" />
-                    </p> --}}
                     <label for="fullname">Branch Name * :</label>
                     <input type="text" class="form-control form-control-sm" name="branch_name" required />
 
-                    {{-- <label>Hobbies (2 minimum):</label>
-                    <p style="padding: 5px;">
-                        <input type="checkbox" name="hobbies[]" id="hobby1" value="ski" data-parsley-mincheck="2"
-                            required class="flat" /> Skiing
-                        <br />
-
-                        <input type="checkbox" name="hobbies[]" id="hobby2" value="run" class="flat" /> Running
-                        <br />
-
-                        <input type="checkbox" name="hobbies[]" id="hobby3" value="eat" class="flat" />
-                        Eating
-                        <br />
-
-                        <input type="checkbox" name="hobbies[]" id="hobby4" value="sleep" class="flat" />
-                        Sleeping
-                        <br />
-                    <p> --}}
+                    <label for="fullname">Website Name * :</label>
+                    <input type="text" class="form-control form-control-sm" name="website" required />
 
                     <label for="heard">Branch Type *:</label>
                     <select name="branch_type" class="form-control form-control-sm" required>
@@ -248,34 +224,14 @@
                     <input type="email" class="form-control form-control-sm" name="branch_email" id="branch_email"
                         data-parsley-trigger="change" required />
 
-                    {{-- <label>Is Admin *:</label>
-                    <p>
-                        Yes:
-                        <input type="radio" class="flat" name="gender" id="genderM" value="M" checked=""
-                            required /> No:
-                        <input type="radio" class="flat" name="gender" id="genderF" value="F" />
-                    </p> --}}
+
                     <label for="fullname">Branch Name * :</label>
                     <input type="text" class="form-control form-control-sm" name="branch_name" id="branch_name"
                         required />
 
-                    {{-- <label>Hobbies (2 minimum):</label>
-                    <p style="padding: 5px;">
-                        <input type="checkbox" name="hobbies[]" id="hobby1" value="ski" data-parsley-mincheck="2"
-                            required class="flat" /> Skiing
-                        <br />
-
-                        <input type="checkbox" name="hobbies[]" id="hobby2" value="run" class="flat" /> Running
-                        <br />
-
-                        <input type="checkbox" name="hobbies[]" id="hobby3" value="eat" class="flat" />
-                        Eating
-                        <br />
-
-                        <input type="checkbox" name="hobbies[]" id="hobby4" value="sleep" class="flat" />
-                        Sleeping
-                        <br />
-                    <p> --}}
+                    <label for="fullname">Website Name * :</label>
+                    <input type="text" class="form-control form-control-sm" name="website" id="website"
+                        required />
 
                     <label for="heard">Branch Type *:</label>
                     <select name="branch_type"id="branch_type" class="form-control form-control-sm" required>
