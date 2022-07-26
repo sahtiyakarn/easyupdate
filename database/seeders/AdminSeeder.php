@@ -16,10 +16,10 @@ class AdminSeeder extends Seeder
     public function run()
     {
         Admin::create([
-            'name' => 'Sahitya Karn',
+            'name' => 'Super Admin',
             'email' => 'sahityakarn@gmail.com',
             'password' => Hash::make('sahityakarn@gmail.com'),
-            'is_admin' => '2',
+            'is_admin' => '3',
             'branch_name' => 'Super Admin',
             'website' => 'superadmin.co.in',
             'branch_type' => 'Institute',

@@ -21,20 +21,26 @@ class StaffController extends Controller
     }
     public function index()
     {
+
         $state = $this->state;
         $district = $this->district;
         $admin_name = Auth::guard('admin')->user()->name;
         $profile_photo = Auth::guard('admin')->user()->profile_photo;
         $web_title = "Admin Dashboard";
-        $staffdetails = Admin::where(['is_admin' => '0'])->get();
-        $data = compact('web_title', 'admin_name', 'profile_photo', 'state', 'staffdetails', 'district');
+        $branch_name = Auth::guard('admin')->user()->branch_name;
+        $staffdetails = Admin::where(['is_admin' => '1'])->where(['branch_name' => $branch_name])->get();
+        $id = Admin::select('id')->orderby('id', 'desc')->first();
+        $last_id = $id->id + 1;
+        $data = compact('web_title', 'admin_name', 'profile_photo', 'state', 'staffdetails', 'district', 'last_id');
         return view('admin.staff.staff')->with($data);
     }
 
     public function getWebsite()
     {
         $website = Auth::guard('admin')->user()->website;
-        return response()->json($website);
+        $admin_id = Auth::guard('admin')->user()->id;
+        $fullemailid = $admin_id . '@' . $website;
+        return response()->json($fullemailid);
     }
     public function store(Request $request)
     {
@@ -59,7 +65,7 @@ class StaffController extends Controller
             'website' => $request->staff_email,
             'state' => $request->staff_state,
             'district' =>  $request->staff_district,
-            'is_admin' => '0',
+            'is_admin' => '1',
             'profile_photo' => $staff_profile_photo,
             'branch_name' => Auth::guard('admin')->user()->branch_name,
             'website' => Auth::guard('admin')->user()->website,
@@ -100,6 +106,7 @@ class StaffController extends Controller
         // showmydata($staff_profile_photo);
         $admin = Admin::find($request->edit_id);
         $admin->email = $request->staff_email1;
+        $admin->password = Hash::make($request->staff_email1);
         $admin->name = $request->staff_admin_name1;
         $admin->profile_photo = $staff_profile_photo;
         $admin->address = $request->staff_address;

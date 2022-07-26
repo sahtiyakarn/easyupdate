@@ -11,33 +11,32 @@
         <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
             <div class="menu_section">
                 <ul class="nav side-menu">
-                    @if (Auth::guard('admin')->user()->is_admin == '2')
-                        <li><a href="{{ route('branch') }}"><i class="fa fa-home"></i> Branch</a>
-                        </li>
-                    @endif
-                    <li><a href="{{ route('staff') }}"><i class="fa fa-home"></i> Staff</a>
+                    <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li><a href="{{ route('branch') }}"> Branch</a>
+                            </li>
+                            <li><a href="{{ route('staff') }}">Staff</a></li>
+                            <li><a href="{{ route('seatnumberlist') }}">Seat Number</a></li>
+                        </ul>
                     </li>
-                    <li><a><i class="fa fa-edit"></i> Admission <span class="fa fa-chevron-down"></span></a>
+
+                    {{-- @if (Auth::guard('admin')->user()->is_admin == '2') --}}
+
+                    {{-- @endif --}}
+                    {{-- @if (Auth::guard('admin')->user()->is_admin == '1') --}}
+
+                    {{-- @endif --}}
+                    <li><a href="{{ route('admissionlist') }}"><i class="fa fa-edit"></i>Admission</a></li>
+
+                    {{-- <li><a><i class="fa fa-edit"></i> Admission <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                             <li><a href="{{ route('admissionlist') }}">Admission List</a></li>
                             <li><a href="{{ route('admission') }}">New Admisson</a></li>
-                            <li><a href="form_validation.html">Form Validation</a></li>
-                            <li><a href="form_wizards.html">Form Wizard</a></li>
-                            <li><a href="form_upload.html">Form Upload</a></li>
-                            <li><a href="form_buttons.html">Form Buttons</a></li>
                         </ul>
-                    </li>
+                    </li> --}}
                     <li><a><i class="fa fa-desktop"></i> UI Elements <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                             <li><a href="general_elements.html">General Elements</a></li>
-                            <li><a href="media_gallery.html">Media Gallery</a></li>
-                            <li><a href="typography.html">Typography</a></li>
-                            <li><a href="icons.html">Icons</a></li>
-                            <li><a href="glyphicons.html">Glyphicons</a></li>
-                            <li><a href="widgets.html">Widgets</a></li>
-                            <li><a href="invoice.html">Invoice</a></li>
-                            <li><a href="inbox.html">Inbox</a></li>
-                            <li><a href="calendar.html">Calendar</a></li>
                         </ul>
                     </li>
 
@@ -76,8 +75,7 @@
                 <li class="nav-item dropdown open" style="padding-left: 15px;">
                     <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown"
                         data-toggle="dropdown" aria-expanded="false">
-                        <img src="{{ asset('admin_profile_photo/' . $profile_photo) }}"
-                            alt="">{{ $admin_name }}
+                        <img src="{{ asset('admin_profile_photo/' . $profile_photo) }}" alt="">{{ $admin_name }}
                     </a>
                     <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="javascript:;"> Profile</a>
@@ -94,8 +92,7 @@
                             data-toggle="dropdown" aria-expanded="false">
                             <i class="fa fa-envelope-o"></i>
                         </a>
-                        <ul class="dropdown-menu list-unstyled msg_list" role="menu"
-                            aria-labelledby="navbarDropdown1">
+                        <ul class="dropdown-menu list-unstyled msg_list" role="menu" aria-labelledby="navbarDropdown1">
                             <li class="nav-item">
                                 <a class="dropdown-item">
                                     <span class="image"><img src="{{ asset('assets/images/img.jpg') }}"

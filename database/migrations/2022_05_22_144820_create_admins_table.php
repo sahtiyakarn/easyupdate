@@ -20,7 +20,7 @@ class CreateAdminsTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->enum('is_admin', ['2', '1', '0'])->default(0);
+            $table->enum('is_admin', ['3', '2', '1'])->default('1');
             $table->text('profile_photo')->nullable();
             $table->string('branch_name');
             $table->string('website');

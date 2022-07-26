@@ -29,16 +29,17 @@ class BranchAdminController extends Controller
         $admin_name = Auth::guard('admin')->user()->name;
         $profile_photo = Auth::guard('admin')->user()->profile_photo;
         $web_title = "Super Admin Dashboard";
-        $branchdetails = Admin::where(['is_admin' => '1'])->get();
+        $branchdetails = Admin::where(['is_admin' => '2'])->get();
         $data = compact('web_title', 'admin_name', 'profile_photo', 'state', 'branchdetails', 'district');
         return view('admin.branch.branchadmin')->with($data);
     }
+
     public function create()
     {
         $admin_name = Auth::guard('admin')->user()->name;
         $profile_photo = Auth::guard('admin')->user()->profile_photo;
         $state = $this->state;
-        showmydata($state);
+        // showmydata($state);
         $web_title = "Super Admin Dashboard";
         $data = compact('web_title', 'admin_name', 'profile_photo');
         return view('admin.branch.branch_create')->with($data);
@@ -56,7 +57,7 @@ class BranchAdminController extends Controller
     public function store(Request $request)
     {
         // showmydata($request->all());
-        DB::enableQueryLog();
+        // DB::enableQueryLog();
         $contact = str_replace("-", "", $request->branch_contact);
 
         //for image 
@@ -72,7 +73,7 @@ class BranchAdminController extends Controller
         $admin->email = $request->branch_email;
         $admin->name = $request->branch_admin_name;
         $admin->password = Hash::make($request->branch_email);
-        $admin->is_admin = '1';
+        $admin->is_admin = '2';
         $admin->profile_photo = $branch_profile_photo;
         $admin->website = $request->website;
         $admin->branch_name = $request->branch_name;
@@ -83,7 +84,7 @@ class BranchAdminController extends Controller
         $admin->district =  $request->branch_district;
         $admin->save();
         return redirect()->back();
-        DB::getQueryLog();
+        // DB::getQueryLog();
     }
 
     public function edit($id)

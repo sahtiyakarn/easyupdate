@@ -17,8 +17,8 @@ class CreateUserSeatsTable extends Migration
             $table->id();
             $table->integer('seat_no');
             $table->string('batch_time');
-            $table->boolean('active')->default(0);
-            $table->unsignedBigInteger('user_id')->nullable();
+            $table->boolean('active')->default(1);
+            $table->unsignedBigInteger('user_id')->default(0);
             $table->unsignedBigInteger('admin_id');
             $table->foreign('admin_id')->references('id')->on('admins');
             $table->timestamps();
